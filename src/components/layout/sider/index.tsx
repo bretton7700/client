@@ -276,7 +276,12 @@ export const Sider: typeof DefaultSider = ({ render }) => {
       <ListItemButton
         key="logout"
         onClick={() => mutateLogout()}
-        sx={{ justifyContent: "center" }}
+        sx={{ justifyContent: "center",
+        margin: '10px auto',
+        borderRadius: '12px',
+        minHeight: '56px',
+        width: '90%'
+       }}
       >
         <ListItemIcon
           sx={{
