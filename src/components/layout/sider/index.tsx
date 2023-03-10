@@ -185,6 +185,10 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                   isSelected ? '#475be8' : "transparent",
                 },
                 justifyContent: "center",
+                margin: '10px auto',
+                borderRadius: '12px',
+                minHeight: '56px',
+                width: '90%'
               }}
             >
               <ListItemIcon
