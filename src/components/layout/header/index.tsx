@@ -31,7 +31,7 @@ export const Header: React.FC = () => {
   const showUserInfo = user && (user.name || user.avatar);
 
   return (
-    <AppBar color="default" position="sticky" elevation={1}>
+    <AppBar color="default" position="sticky" elevation={0} sx={{ background: '#fcfcfc'}}>
       <Toolbar>
         <Stack
           direction="row"
