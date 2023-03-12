@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Refine,  AuthProvider } from "@pankod/refine-core";
+import { Refine, AuthProvider } from "@pankod/refine-core";
 import {
   notificationProvider,
   RefineSnackbarProvider,
@@ -9,6 +9,16 @@ import {
   ReadyPage,
   ErrorComponent,
 } from "@pankod/refine-mui";
+
+
+import {
+  AccountCircleOutlined,
+  ChatBubbleOutline,
+  PeopleAltOutlined,
+  Star,
+  StarOutlineRounded,
+  VillaOutlined
+} from '@mui/icons-material';
 
 import dataProvider from "@pankod/refine-simple-rest";
 import { MuiInferencer } from "@pankod/refine-inferencer/mui";
@@ -97,7 +107,7 @@ function App() {
 
   return (
     <>
-      
+
       <ColorModeContextProvider>
         <CssBaseline />
         <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
@@ -111,7 +121,31 @@ function App() {
               {
                 name: "property",
                 list: MuiInferencer,
-                             },
+                icon: <VillaOutlined/>
+              },
+              {
+                name: "agents",
+                list: MuiInferencer,
+                icon: <PeopleAltOutlined/>
+              },
+              {
+                name: "review",
+                list: MuiInferencer,
+                icon: <StarOutlineRounded />
+              },
+              {
+                name: "message",
+                list: MuiInferencer,
+                icon: <ChatBubbleOutline />
+              },
+              {
+                name: "my-profile",
+                options: {
+                  label: 'My Profile'
+                },
+                list: MuiInferencer,
+                icon: <AccountCircleOutlined />
+              },
             ]}
             Title={Title}
             Sider={Sider}
