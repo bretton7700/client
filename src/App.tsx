@@ -14,6 +14,7 @@ import {
 import {
   AccountCircleOutlined,
   ChatBubbleOutline,
+  Home,
   PeopleAltOutlined,
   Star,
   StarOutlineRounded,
@@ -27,7 +28,16 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useTranslation } from "react-i18next";
 import { ColorModeContextProvider } from "contexts";
 import { Title, Sider, Layout, Header } from "components/layout";
-import { Login } from "pages/login";
+import { Login,
+  HomePage,
+  Agents,
+  MyProfile,
+  PropertyDetails,
+  AllProperties,
+  CreateProperty,
+  AgentProfile,
+  EditProperty,
+ } from "pages";
 import { CredentialResponse } from "interfaces/google";
 import { parseJwt } from "utils/parse-jwt";
 
@@ -155,6 +165,7 @@ function App() {
             authProvider={authProvider}
             LoginPage={Login}
             i18nProvider={i18nProvider}
+            DashboardPage={HomePage}
           />
         </RefineSnackbarProvider>
       </ColorModeContextProvider>
