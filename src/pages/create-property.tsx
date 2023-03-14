@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useGetIdentity } from "@pankod/refine-core/dist/hooks";
+import { useGetIdentity } from "@pankod/refine-core";
 import { FieldValues, useForm } from "@pankod/refine-react-hook-form";
 import { useNavigate } from "@pankod/refine-react-router-v6";
 
@@ -10,8 +10,21 @@ const CreateProperty = () => {
   const { data: user } = useGetIdentity();
   const [propertyImage, setPropertyImage] = useState({ name: '', url: ''});
   const { refineCore: { onFinish, formLoading }, register, handleSubmit } = useForm();
+
+  const handleImageChange = () =>{};
+  const onFinishHandler = () =>{};
   return (
-    <div>create-property</div>
+    <Form
+    type="Create"
+    register={register}
+    onFinish={onFinish}
+    formLoading={formLoading}
+    handleSubmit={handleSubmit}
+    handleImageChange={handleImageChange}
+    onFinishHandler={onFinishHandler}
+    propertyImage={propertyImage}
+
+    />
   )
 }
 
