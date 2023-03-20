@@ -28,7 +28,8 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useTranslation } from "react-i18next";
 import { ColorModeContextProvider } from "contexts";
 import { Title, Sider, Layout, Header } from "components/layout";
-import { Login,
+import {
+  Login,
   HomePage,
   Agents,
   MyProfile,
@@ -37,9 +38,10 @@ import { Login,
   CreateProperty,
   AgentProfile,
   EditProperty,
- } from "pages";
+} from "pages";
 import { CredentialResponse } from "interfaces/google";
 import { parseJwt } from "utils/parse-jwt";
+import { profile } from "console";
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -59,17 +61,36 @@ function App() {
   const { t, i18n } = useTranslation();
 
   const authProvider: AuthProvider = {
-    login: ({ credential }: CredentialResponse) => {
+    login: async ({ credential }: CredentialResponse) => {
       const profileObj = credential ? parseJwt(credential) : null;
 
+      //Save to MongoDb
       if (profileObj) {
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            ...profileObj,
+        const response = await fetch('http://localhost:8080/api/v1/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: profileObj.name,
+            email: profileObj.email,
             avatar: profileObj.picture,
           })
-        );
+        })
+
+        const data = await response.json();
+
+        if (response.status === 200) {
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              ...profileObj,
+              avatar: profileObj.picture,
+              userid: data._id
+            })
+          );
+
+        } else {
+          return Promise.reject();
+        }
       }
 
       localStorage.setItem("token", `${credential}`);
@@ -134,13 +155,13 @@ function App() {
                 show: PropertyDetails,
                 create: CreateProperty,
                 edit: EditProperty,
-                icon: <VillaOutlined/>
+                icon: <VillaOutlined />
               },
               {
                 name: "agents",
                 list: Agents,
                 show: AgentProfile,
-                icon: <PeopleAltOutlined/>
+                icon: <PeopleAltOutlined />
               },
               {
                 name: "reviews",
